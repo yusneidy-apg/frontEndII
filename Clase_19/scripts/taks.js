@@ -45,7 +45,8 @@ window.addEventListener('load', function () {
     }
    }
 
-   fetch(url, config).then( response => response.json() )
+   fetch(url, config)
+   .then( response => response.json() )
    .then(  (data) => {
     console.log(data);
     nombreUsuario.textContent = data.firstName;
@@ -67,7 +68,8 @@ window.addEventListener('load', function () {
       }
     }
   
-    fetch(url, config).then(  response => response.json() )
+    fetch(url, config)
+    .then(  response => response.json() )
     .then( data => {
       console.log(data);
       renderizarTareas(data);
@@ -84,10 +86,40 @@ window.addEventListener('load', function () {
 
   formCrearTarea.addEventListener('submit', function (event) {
     event.preventDefault();
+    const nuevaTarea = {
+      description: inputTarea.value,
+      completed: false,
+    };
     console.log('Creando tarea ', inputTarea.value );
 
     // Solicitud a la API con el method POST
+    const url = "https://ctd-todo-api.herokuapp.com/v1/tasks";
 
+    const config = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        authorization: jwt,
+      },
+      body: JSON.stringify(nuevaTarea),
+    };
+
+    fetch(url, config)
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+
+        if (data.description) {
+          consultarTareas()
+        }
+      })
+      .catch((response) => {
+        console.error(response);
+      });
+    
   });
 
 
@@ -111,7 +143,9 @@ window.addEventListener('load', function () {
       </li>
       `;
     });
-
+    
+//const btnCambiarEstado = document.querySelectorAll(.change)
+//Element.addEventListener(click, function)
 
   };
 
@@ -131,14 +165,12 @@ window.addEventListener('load', function () {
   /*                     FUNCIÓN 7 - Eliminar tarea [DELETE]                    */
   /* -------------------------------------------------------------------------- */
   function botonBorrarTarea() {
-   
-    
-
-    
+  
 
   };
 
   obtenerNombreUsuario();
   consultarTareas();
+
 
 
