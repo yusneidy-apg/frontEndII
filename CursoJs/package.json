@@ -1,0 +1,15 @@
+{
+  "name": "cursojs",
+  "version": "1.0.0",
+  "description": "mi primer proyecto de Js de Open Bootcamp",
+  "main": "index.js",
+  "scripts": {
+    "start": "hola_mundo.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "proyecto"
+  ],
+  "author": "Yusneidy Polanco",
+  "license": "ISC"
+}
